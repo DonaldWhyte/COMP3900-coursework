@@ -3,8 +3,12 @@ package sc10dw.distributed.cw1;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class ConnectionManager {
@@ -33,6 +37,30 @@ public class ConnectionManager {
 		String password = props.getProperty("jdbc.password");
 
 		return DriverManager.getConnection(url, user, password);
-  }	
+	}
+	
+	public static void displayDatabaseMetadata(Connection dbConnection) throws SQLException {
+		DatabaseMetaData dbMetadata = dbConnection.getMetaData();
+		System.out.println("Database Product Name: " + dbMetadata.getDatabaseProductName());
+		System.out.println("Database Product Version: " + dbMetadata.getDatabaseProductVersion());
+		System.out.println("Driver Name: " + dbMetadata.getDriverName());
+		System.out.println("Driver Version: " + dbMetadata.getDriverVersion());
+		System.out.println("JDBC Version" + dbMetadata.getJDBCMajorVersion() + "." + dbMetadata.getJDBCMinorVersion() );		
+	}
+	
+	public static List<String> retrieveDatabaseTables(Connection dbConnection) throws SQLException {
+		// Retrieve table metadata in the form a ResultSet
+		DatabaseMetaData dbMetadata = dbConnection.getMetaData();
+		String[] types = { "TABLE" };
+		String catalog = dbConnection.getCatalog();
+		String schema = "tc30_cw1"; // name of the database we want tables of
+		ResultSet tables = dbMetadata.getTables(catalog, schema, null, types);
+		
+		List<String> tableNames = new ArrayList<String>();
+		while (tables.next()) {
+			tableNames.add( tables.getString("TABLE_NAME") );
+		}
+		return tableNames;
+	}
 	
 }

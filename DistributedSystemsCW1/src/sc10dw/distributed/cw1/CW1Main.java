@@ -14,15 +14,15 @@ public class CW1Main {
 		
 		try {
 			// Establish connection and display information about the database
+			System.out.println("Database Information\n-----------------------------");
 			dbConnection = ConnectionManager.getConnection();
-			DatabaseMetaData dbMetadata = dbConnection.getMetaData();
-			System.out.println("Database Product Name: " + dbMetadata.getDatabaseProductName());
-			System.out.println("Database Product Version: " + dbMetadata.getDatabaseProductVersion());
-			System.out.println("Driver Name: " + dbMetadata.getDriverName());
-			System.out.println("Driver Version: " + dbMetadata.getDriverVersion());
-			System.out.println("JDBC Version" + dbMetadata.getJDBCMajorVersion() + "." + dbMetadata.getJDBCMinorVersion() );
+			ConnectionManager.displayDatabaseMetadata(dbConnection);
 			System.out.println("");
-			// Display database schema
+			System.out.println("Database Tables\n-----------------------------");
+			for (String tableName : ConnectionManager.retrieveDatabaseTables(dbConnection)) {
+				System.out.println(tableName);	
+			}
+			System.out.println("");
 					
 			EmployeeRetriever retriever = new EmployeeRetriever(dbConnection);
 			List<Employee> employees = null;			

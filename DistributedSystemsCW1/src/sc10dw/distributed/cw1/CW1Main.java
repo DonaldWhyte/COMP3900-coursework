@@ -1,5 +1,7 @@
 package sc10dw.distributed.cw1;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.util.List;
 
@@ -11,11 +13,24 @@ public class CW1Main {
 		
 		try {
 			dbConnection = ConnectionManager.getConnection();
-			
-			System.out.println("All Employees\n------------------------");
-			
 			EmployeeRetriever retriever = new EmployeeRetriever(dbConnection);
-			List<Employee> employees = retriever.allEmployees();
+			List<Employee> employees = null;
+		
+			// Ask user for surname of employee to such for
+			System.out.print("Enter surname of employee to retrieve (or \"--ALL\" for all employees): ");
+			BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+			String surname = inputReader.readLine();
+			
+			// Based on input, retrieve all employees or look for
+			// employees with a specific surname
+			if (surname.equals("--ALL")) {
+				employees = retriever.allEmployees();
+			} else {
+				employees = retriever.getEmployees(surname);
+			}
+			
+			// Output result of query
+			System.out.println("Found Employees\n-----------------------------");
 			for (Employee employee : employees) {
 				System.out.println(employee);
 			}

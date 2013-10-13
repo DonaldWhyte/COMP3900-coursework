@@ -29,14 +29,16 @@ public class EmployeeRetriever {
 				e.printStackTrace();
 			}
 		}
-		// Just return empty list if a dayabase error occurred
+		// Just return empty list if a database error occurred
 		return new ArrayList<Employee>();
 	}
 	
 	public List<Employee> getEmployees(String surname) {
 		Statement statement = null;
 		try {
-			String query = String.format(EMPLOYEES_BY_SURNAME_QUERY, surname);
+			// NOTE: Surname is converted entirely to uppercase here as
+			// as that's how they're stored on the database
+			String query = String.format(EMPLOYEES_BY_SURNAME_QUERY, surname.toUpperCase());
 			statement = dbConnection.createStatement();
 			ResultSet results = statement.executeQuery(query);
 			return processEmployeeResults(results);

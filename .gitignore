@@ -6,3 +6,7 @@
 *.swp
 *.tmp
 *~
+
+# Eclipse files
+.metadata
+*.settings*

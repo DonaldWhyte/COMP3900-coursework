@@ -25,6 +25,12 @@ public class Employee {
 		return basePay;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("Employee (%s %s, %d, %.2f)",
+			fname, sname, avgNumberHours, basePay);
+	}
+	
 	private String fname;
 	private String sname;
 	private int avgNumberHours;

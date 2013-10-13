@@ -1,0 +1,8 @@
+# Java output
+*.class
+*.jar
+
+# Temp files
+*.swp
+*.tmp
+*~

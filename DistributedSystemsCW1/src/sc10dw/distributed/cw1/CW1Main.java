@@ -23,15 +23,21 @@ public class CW1Main {
 				System.out.println(tableName);	
 			}
 			System.out.println("");
-					
+			
+			// Print out summary statistics
 			EmployeeRetriever retriever = new EmployeeRetriever(dbConnection);
-			List<Employee> employees = null;			
+			System.out.println("Summary Statistics\n-----------------------------");
+			System.out.println("Average Number of Hours Worked: " + retriever.averageNumHoursWorked());
+			System.out.println("Average Base Pay Rate: " + retriever.averagePayRate());
+			System.out.println("");
+						
 			// Ask user for surname of employee to search for
 			System.out.print("Enter surname of employee to retrieve (or \"--ALL\" for all employees): ");
 			BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 			String surname = inputReader.readLine();
 			// Based on input, retrieve all employees or look for
 			// employees with a specific surname
+			List<Employee> employees = null;
 			if (surname.equals("--ALL")) {
 				employees = retriever.allEmployees();
 			} else {

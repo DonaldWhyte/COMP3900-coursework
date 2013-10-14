@@ -56,6 +56,22 @@ public class EmployeeRetriever {
 		return new ArrayList<Employee>();
 	}
 	
+	public double averageNumHoursWorked() throws SQLException {
+		Statement statement = dbConnection.createStatement();
+		ResultSet result = statement.executeQuery(AVERAGE_HOURS_WORKED_QUERY);
+		double avgHours = processAverage(result);
+		statement.close();
+		return avgHours;
+	}	
+	
+	public double averagePayRate() throws SQLException {
+		Statement statement = dbConnection.createStatement();
+		ResultSet result = statement.executeQuery(AVERAGE_BASE_PAY_RATE_QUERY);
+		double avgPayRate = processAverage(result);
+		statement.close();
+		return avgPayRate;		
+	}
+	
 	private List<Employee> processEmployeeResults(ResultSet results) throws SQLException {
 		List<Employee> employees = new ArrayList<Employee>();
 		while (results.next()) {
@@ -71,9 +87,16 @@ public class EmployeeRetriever {
 		return employees;
 	}
 	
+	private double processAverage(ResultSet result) throws SQLException {
+		result.next();
+		return result.getDouble(1);
+	}
+
 	private Connection dbConnection;
 	
 	private final static String ALL_EMPLOYEES_QUERY = "SELECT * FROM employees";
 	private final static String EMPLOYEES_BY_SURNAME_QUERY = "SELECT * FROM employees WHERE surname = '%s'";
+	private final static String AVERAGE_HOURS_WORKED_QUERY = "SELECT AVG(numberHours) FROM employees";
+	private final static String AVERAGE_BASE_PAY_RATE_QUERY = "SELECT AVG(baseRate) FROM employees";
 	
 }

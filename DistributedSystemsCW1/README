@@ -1,0 +1,20 @@
+-----------------------------------------------------------
+Name: Distributed Systems Coursework 1
+Year: 2013-2014
+Author: Donald Whyte (sc10dw@leeds.ac.uk)
+-----------------------------------------------------------
+
+All the source files required to execute the program are
+provided in this ZIP file. Eclipse project files are also
+given for convenient compilation and execution.
+
+The 'jdbc.properties' file is required as it specifies
+the database to connect to and the username/password to
+use for the connection (currently this defaults to my
+credentials).
+
+Specifying a surname to search for is done by manually
+entering the surname on the command prompt.
+
+Database metadata and summary statistics and displayed
+when the program starts.

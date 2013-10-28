@@ -22,7 +22,8 @@ public class EmployeeRetriever
 			// Print off employee information
 			System.out.println("Employee: " + employee.getForename() + " " + employee.getSurname());
 			System.out.println("Works " + employee.getNumberHours() + " hours a week");
-			System.out.println("Hourly rate is £ " + employee.getHourlyRate());
+			System.out.println("Hourly rate is £" + employee.getHourlyRate());
+			System.out.println("Total earnings per week is £" + employee.getWeeklyEarning());
 		} catch (RemoteException ex) {
 			System.out.println("Could not retrieve employee with object name '" + args[0] + "'");
 		} catch (NotBoundException ex) {

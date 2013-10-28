@@ -8,7 +8,7 @@ public class EmployeeUpdater
 
 	public static void main(String[] args)
 	{
-		// Retrieve command line argumens
+		// Retrieve command line arguments
 		if (args.length < 4)
 		{
 			System.out.println("Usage: java EmployeeUpdater <EmployeeObjectName> <Forename> <HourlyRate> <HoursPerWeek>");

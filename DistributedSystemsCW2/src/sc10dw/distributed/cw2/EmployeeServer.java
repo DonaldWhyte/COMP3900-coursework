@@ -28,7 +28,7 @@ public class EmployeeServer {
 				Employee employee = foundEmployees.get(0);
 				// rebind() so it doesn't matter if an object already exists with that name
 				Registry registry = LocateRegistry.getRegistry();
-			        registry.rebind(argv[1], employee); 
+			    registry.rebind(argv[1], employee); 
 				// Inform invoker of server that object has been bound
 				System.out.println("Employee " + employee.getForename() + " "
 					+ employee.getSurname() + " has been bound with name "

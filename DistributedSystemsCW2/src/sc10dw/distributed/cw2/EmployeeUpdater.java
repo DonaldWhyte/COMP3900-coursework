@@ -38,9 +38,9 @@ public class EmployeeUpdater
 			employee.setHourlyRate(hourlyRate);
 			employee.setNumberHours(hoursPerWeek);
 		} catch (RemoteException ex) {
-			// TODO: handle this
+			System.out.println("Could not update employee with object name '" + args[0] + "'");
 		} catch (NotBoundException ex) {
-			// TODO: handle this
+			System.out.println("Could not update employee with object name '" + args[0] + "'");
 		}
 	}
 

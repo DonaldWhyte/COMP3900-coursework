@@ -22,7 +22,7 @@ public class EmployeeServer {
 			DBEmployeeRetriever employeeRetriever = new DBEmployeeRetriever(dbConnection);
 			List<Employee> foundEmployees = employeeRetriever.getEmployees(argv[0]);
 			if (foundEmployees.isEmpty()) {
-				System.out.println("No employees were foudn with surname '" + argv[0] + "'. Could not bind employee.");
+				System.out.println("No employees were found with surname '" + argv[0] + "'. Could not bind employee.");
 			} else {
 				// Bind the first employee to the RMI registry
 				Employee employee = foundEmployees.get(0);
@@ -30,7 +30,7 @@ public class EmployeeServer {
 				Registry registry = LocateRegistry.getRegistry();
 			        registry.rebind(argv[1], employee); 
 				// Inform invoker of server that object has been bound
-				System.out.println("Emloyee " + employee.getForename() + " "
+				System.out.println("Employee " + employee.getForename() + " "
 					+ employee.getSurname() + " has been bound with name "
 					+ argv[1] + ".");
 			}

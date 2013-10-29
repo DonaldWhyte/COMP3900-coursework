@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.*;
@@ -21,16 +22,19 @@ public class EmployeeInformation extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		String employeeObjectName = request.getParameter("surname");
-		Employee employee = getEmployee(employeeObjectName);
-		if (employee != null) {
-			out.println("<html>\n\n<head>\n\t<title>Employee " + employee.getForename() + " " + employee.getSurname() + "</title>\n</head>\n\n");
+		List<Employee> employees = getEmployees(employeeObjectName);
+		if (employees.size() > 0) {
+			out.println("<html>\n\n<head>\n\t<title>Employee Information</title>\n</head>\n\n");
 			out.println("\t<body>");
-			out.println("\t\t<h1>Employee Information</h1>");
+			out.println("\t\t<h1>" + employees.size() + " Employee(s) Found</h1>");
 			out.println("\t\t<table>");
-			out.println("\t\t<tr><th>Name</th><td>" + employee.getForename() + " " + employee.getSurname() + "</td></tr>");
-			out.println("\t\t<tr><th>Hourly Rate</th><td>" + employee.getHourlyRate() + "</td></tr>");
-			out.println("\t\t<tr><th>Hours per Week</th><td>" + employee.getNumberHours() + "</td></tr>");
-			out.println("\t\t<tr><th>Total Earnings per Week</th><td>" + employee.getWeeklyEarning() + "</td></tr>");
+			for (Employee emp : employees) {
+				out.println("\t\t<tr><th>Name</th><td>" + emp.getForename() + " " + emp.getSurname() + "</td></tr>");
+				out.println("\t\t<tr><th>Hourly Rate</th><td>" + emp.getHourlyRate() + "</td></tr>");
+				out.println("\t\t<tr><th>Hours per Week</th><td>" + emp.getNumberHours() + "</td></tr>");
+				out.println("\t\t<tr><th>Total Earnings per Week</th><td>" + emp.getWeeklyEarning() + "</td></tr>");
+				out.println("\t\t<tr><tr>");
+			}
 			out.println("\t\t</table>");
 			out.println("\t\t<a href='" + Config.ROOT_URL + "'><button type='button'>Back to Main Page</button></a>");
 			out.println("\t</body>\n\n</html>"); 
@@ -45,19 +49,13 @@ public class EmployeeInformation extends HttpServlet {
 		out.close();
 	}
 	
-	private Employee getEmployee(String surname) {
-		// Find and return first employee with given surname
+	private List<Employee> getEmployees(String surname) {
 		try {
 			Registry registry = LocateRegistry.getRegistry();
 			EmployeeFactory employeeFactory = (EmployeeFactory)registry.lookup("employee_factory");
-			List<Employee> employees = employeeFactory.getEmployee(surname);
-			if (employees.size() > 0) {
-				return employees.get(0);
-			} else {
-				return null;
-			}
+			return employeeFactory.getEmployee(surname);
 		} catch (Exception e) {
-			return null;
+			return new ArrayList<Employee>();
 		}
 		
 	}

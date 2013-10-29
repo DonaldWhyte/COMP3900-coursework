@@ -21,11 +21,13 @@ public class UserForms extends HttpServlet {
 		out.println("\t\t</form>");
 		out.println("\t\t<h1>Create Employee</h1>");
 		out.println("\t\t<form action='" + Config.ROOT_URL + "/create' method='POST'>");
-		out.println("\t\t\tForename: <input type='text' name='forename' /><br />");
-		out.println("\t\t\tSurname: <input type='text' name='surname' /><br />");
-		out.println("\t\t\tHourly Pay Rate: <input type='text' name='hourlyRate' /><br />");
-		out.println("\t\t\tNumber of Hours per Week: <input type='text' name='hoursPerWeek' /><br />");
-		out.println("\t\t\t<input type='submit' value='Create' />");
+		out.println("\t\t\t<table>");
+		out.println("\t\t\t<tr><td>Forename</td><td><input type='text' name='forename' /></td></tr>");
+		out.println("\t\t\t<tr><td>Surname</td><td><input type='text' name='surname' /></td></tr>");
+		out.println("\t\t\t<tr><td>Hourly Pay Rate</td><td><input type='text' name='hourlyRate' /></td></tr>");
+		out.println("\t\t\t<tr><td>Number of Hours per Week</td><td><input type='text' name='hoursPerWeek' /></td></tr>");
+		out.println("\t\t\t<tr><td><input type='submit' value='Create' /></td></tr>");
+		out.println("\t\t\t</table>");
 		out.println("\t\t</form>");
 		out.println("</body>\n\n</html>");
 		

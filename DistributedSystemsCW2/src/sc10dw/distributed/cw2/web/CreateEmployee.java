@@ -17,7 +17,10 @@ public class CreateEmployee extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {		
+		throws ServletException, IOException {
+		
+		String title = "";
+		String content = "";
 		try {
 			// Create employee and redirect client to that employee's information page
 			String surname = request.getParameter("surname");
@@ -26,20 +29,24 @@ public class CreateEmployee extends HttpServlet {
 			
 			createEmployee(request.getParameter("forename"),
 					surname, hourlyRate, hoursPerWeek);
-			response.sendRedirect(Config.ROOT_URL + "/employee?surname=" + surname);
+			title = "Employee Created";
+			content = "<p>Employee with given details has been successfully created.</p>";
+			content += "\t\t<a href='" + Config.ROOT_URL + "'><button type='button'>Back to Main Page</button></a>";
 		} catch (Exception ex) {
 			// Return error message if they employee could not be created
-			response.setContentType(Config.HTTP_CONTENT_TYPE);
-			PrintWriter out = response.getWriter();
-			out.println("<html>\n\n<head>\n\t<title>Employee Could Not Be Created</title>\n</head>\n\n");
-			out.println("\t<body>\t\t<h1>Employee Could Not Be Created</h1>");
-			out.println("\t\t<p>A server-side error occurred when attempting to create the specified employee:</p>");
-			out.println("\t\t<p>" + ex.getMessage() + "</p>");
-			out.println("\t\t<a href='" + Config.ROOT_URL + "'><button type='button'>Back to Main Page</button></a>");
-			
-			out.println("\t</body>\n\n</html>");
-			out.close();
+			title = "Employee Could Not Be Created";
+			content = "\t\t<p>A server-side error occurred when attempting to create the specified employee:</p>";
+			content += "\t\t<p>" + ex.getMessage() + "</p>";
+			content += "\t\t<a href='" + Config.ROOT_URL + "'><button type='button'>Back to Main Page</button></a>";
 		}
+		
+		response.setContentType(Config.HTTP_CONTENT_TYPE);
+		PrintWriter out = response.getWriter();
+		out.println("<html>\n\n<head>\n\t<title>" + title + "</title>\n</head>\n\n");
+		out.println("\t<body><h1>" + title + "</h1>");
+		out.println(content);
+		out.println("\t</body>\n\n</html>");
+		out.close();
 	}
 	
 	private Employee createEmployee(String forename, String surname,

@@ -6,7 +6,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.List;
 
 import javax.servlet.http.*;
 import javax.servlet.ServletException;
@@ -15,13 +14,11 @@ import sc10dw.distributed.cw2.*;
 
 /**
  * @author sc10dw
- *
+ * Servlet for creating new employees. Reports success or
+ * failure of employee creation with appropriate HTML responses.
  */
 public class CreateEmployee extends HttpServlet {
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
@@ -57,22 +54,14 @@ public class CreateEmployee extends HttpServlet {
 	}
 	
 	/**
-	 * @param forename
-	 * @param surname
-	 * @param hourlyRate
-	 * @param hoursPerWeek
-	 * @return
-	 * @throws RemoteException
-	 * @throws NotBoundException
-	 */
-	/**
-	 * @param forename
-	 * @param surname
-	 * @param hourlyRate
-	 * @param hoursPerWeek
-	 * @return
-	 * @throws RemoteException
-	 * @throws NotBoundException
+	 * Create new employee using a standard factory retriever over RMI.
+	 * @param forename Forename of employee
+	 * @param surname Surname of employee
+	 * @param hourlyRate How much the employee is paid an hour
+	 * @param hoursPerWeek Hours per week employee works
+	 * @return Newly created employee with given details
+	 * @throws RemoteException if problem retrieving EmployeeFactory
+	 * @throws NotBoundException if EmployeeFactory could not be found in RMI registry
 	 */
 	private Employee createEmployee(String forename, String surname,
 		double hourlyRate, int hoursPerWeek) throws RemoteException, NotBoundException {

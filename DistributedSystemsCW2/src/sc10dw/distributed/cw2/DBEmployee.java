@@ -5,16 +5,18 @@ import java.rmi.server.*;
 
 /**
  * @author sc10dw
- *
+ * Implementation of employee for emploees retrieved from JDBC database.
  */
 public class DBEmployee extends UnicastRemoteObject implements Employee {
 
 	/**
-	 * @param fname
-	 * @param sname
-	 * @param hoursPerWeek
-	 * @param hourlyRate
-	 * @throws RemoteException
+	 * Construct new instance of employee, defining all of
+	 * their properties initially in the constructor.
+	 * @param fname Forename of employee
+	 * @param sname Surname of employee
+	 * @param hoursPerWeek Hours per week employee works
+	 * @param hourlyRate How much the employee is paid an hour
+	 * @throws RemoteException if problem creating RMI object
 	 */
 	public DBEmployee(String fname, String sname, int hoursPerWeek, double hourlyRate) throws RemoteException { 
 		this.fname = fname;
@@ -23,45 +25,33 @@ public class DBEmployee extends UnicastRemoteObject implements Employee {
 		this.hourlyRate = hourlyRate;
 	}
 
-	/* (non-Javadoc)
-	 * @see sc10dw.distributed.cw2.Employee#getSurname()
-	 */
+	@Override
 	public String getSurname() throws RemoteException {
 		return sname;
 	}
 
-	/* (non-Javadoc)
-	 * @see sc10dw.distributed.cw2.Employee#getForename()
-	 */
+	@Override
 	public String getForename() throws RemoteException {
 		return fname;
 	}
 
-	/* (non-Javadoc)
-	 * @see sc10dw.distributed.cw2.Employee#getNumberHours()
-	 */
+	@Override
 	public int getNumberHours() throws RemoteException
 	{
 		return hoursPerWeek;
 	}
 
-	/* (non-Javadoc)
-	 * @see sc10dw.distributed.cw2.Employee#getHourlyRate()
-	 */
+	@Override
 	public double getHourlyRate() throws RemoteException {
 		return hourlyRate;
 	}
 
-	/* (non-Javadoc)
-	 * @see sc10dw.distributed.cw2.Employee#getWeeklyEarning()
-	 */
+	@Override
 	public double getWeeklyEarning() throws RemoteException {
 		return hoursPerWeek * hourlyRate;
 	}
 
-	/* (non-Javadoc)
-	 * @see sc10dw.distributed.cw2.Employee#setForename(java.lang.String)
-	 */
+	@Override
 	public void setForename(String s) throws RemoteException {
 		fname = s;
 	}
@@ -73,16 +63,11 @@ public class DBEmployee extends UnicastRemoteObject implements Employee {
 		hoursPerWeek = n;
 	}
 
-	/* (non-Javadoc)
-	 * @see sc10dw.distributed.cw2.Employee#setHourlyRate(double)
-	 */
+	@Override
 	public void setHourlyRate(double r) throws RemoteException {
 		hourlyRate = r;
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.rmi.server.RemoteObject#toString()
-	 */
 	@Override
 	public String toString() {
 		return String.format("Employee (%s %s, %d, %.2f)",
@@ -90,19 +75,19 @@ public class DBEmployee extends UnicastRemoteObject implements Employee {
 	}
 	
 	/**
-	 * 
+	 * Forename of employee
 	 */
 	private String fname;
 	/**
-	 * 
+	 * Surname of employee
 	 */
 	private String sname;
 	/**
-	 * 
+	 * Hours per week employee works
 	 */
 	private int hoursPerWeek;
 	/**
-	 * 
+	 * How much the employee is paid an hour
 	 */
 	private double hourlyRate;
 	

@@ -6,11 +6,17 @@ import java.util.List;
 
 /**
  * @author sc10dw
- *
+ * Version of EmployeeServer which looks up employees with given surname
+ * in a JDBC database, then binds that employee as an object in the
+ * RMI registry.
+ * 
+ * If more than one employee exist with given surname, first employee
+ * found is used.
  */
 public class DBEmployeeServer {
 
      /**
+     * Entry point of application.
      * @param argv
      */
     public static void main(String[] argv)

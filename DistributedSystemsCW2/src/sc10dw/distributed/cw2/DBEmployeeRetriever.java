@@ -10,20 +10,23 @@ import java.util.List;
 
 /**
  * @author sc10dw
- *
+ * Encapsulates database retrieval of employees 
+ * TODO
  */
 public class DBEmployeeRetriever {
 
 	/**
-	 * @param dbConnection
+	 * Construct instance of the employee retrieve which 
+	 * @param dbConnection Connection to database containing employee information
 	 */
 	public DBEmployeeRetriever(Connection dbConnection) {
 		this.dbConnection = dbConnection;
 	}
 	
 	/**
-	 * @return
-	 * @throws RemoteException
+	 * Retrieve all employees in database.
+	 * @return List of all employees in database
+	 * @throws RemoteException if there's a problem instantiating Employee instances
 	 */
 	public List<Employee> allEmployees() throws RemoteException {
 		Statement statement = null;
@@ -46,9 +49,9 @@ public class DBEmployeeRetriever {
 	}
 	
 	/**
-	 * @param surname
-	 * @return
-	 * @throws RemoteException
+	 * @param surname Surname to use to search for employees
+	 * @return List of emmployees with given surname
+	 * @throws RemoteException if there's a problem instantiating Employee instances
 	 */
 	public List<Employee> getEmployees(String surname) throws RemoteException {
 		Statement statement = null;
@@ -72,36 +75,12 @@ public class DBEmployeeRetriever {
 		
 		return new ArrayList<Employee>();
 	}
-	
+
 	/**
-	 * @return
-	 * @throws SQLException
-	 */
-	public double averageNumHoursWorked() throws SQLException {
-		Statement statement = dbConnection.createStatement();
-		ResultSet result = statement.executeQuery(AVERAGE_HOURS_WORKED_QUERY);
-		double avgHours = processAverage(result);
-		statement.close();
-		return avgHours;
-	}	
-	
-	/**
-	 * @return
-	 * @throws SQLException
-	 */
-	public double averagePayRate() throws SQLException {
-		Statement statement = dbConnection.createStatement();
-		ResultSet result = statement.executeQuery(AVERAGE_BASE_PAY_RATE_QUERY);
-		double avgPayRate = processAverage(result);
-		statement.close();
-		return avgPayRate;		
-	}
-	
-	/**
-	 * @param results
-	 * @return
-	 * @throws RemoteException
-	 * @throws SQLException
+	 * @param results Result of JDBC SQL query
+	 * @return List of Employee instances created from given results 
+	 * @throws RemoteException if there's a problem instantiating Employee instances
+	 * @throws SQLException if there is an error in querying or processing SQL data
 	 */
 	private List<Employee> processEmployeeResults(ResultSet results) throws RemoteException, SQLException {
 		List<Employee> employees = new ArrayList<Employee>();
@@ -117,37 +96,19 @@ public class DBEmployeeRetriever {
 		}
 		return employees;
 	}
-	
-	/**
-	 * @param result
-	 * @return
-	 * @throws SQLException
-	 */
-	private double processAverage(ResultSet result) throws SQLException {
-		result.next();
-		return result.getDouble(1);
-	}
 
 	/**
-	 * 
+	 * Connection to database containing employees.
 	 */
 	private Connection dbConnection;
 	
 	/**
-	 * 
+	 * SQL query for selecting all employees in database.
 	 */
 	private final static String ALL_EMPLOYEES_QUERY = "SELECT * FROM employees";
 	/**
-	 * 
+	 * SQL query for selecting employees with a specific surname.
 	 */
 	private final static String EMPLOYEES_BY_SURNAME_QUERY = "SELECT * FROM employees WHERE surname = '%s'";
-	/**
-	 * 
-	 */
-	private final static String AVERAGE_HOURS_WORKED_QUERY = "SELECT AVG(numberHours) FROM employees";
-	/**
-	 * 
-	 */
-	private final static String AVERAGE_BASE_PAY_RATE_QUERY = "SELECT AVG(baseRate) FROM employees";
 	
 }

@@ -13,17 +13,20 @@ import java.util.Properties;
 
 /**
  * @author sc10dw
- *
+ * Encapsulates logic for connecting to a JDBC database.
  */
 public class DBConnectionManager {
 
 	/**
-	 * 
+	 * Filename (relative path) to the properties file
+	 * which contains the necessary information to connect
+	 * to the desired database.
 	 */
 	private static String propertiesFilename = "jdbc.properties";
 	
 	/**
-	 * @return
+	 * Establish connection to database specified in JDBC propertes file.
+	 * @return JDBC Connection object
 	 * @throws IOException
 	 * @throws SQLException
 	 */
@@ -49,39 +52,6 @@ public class DBConnectionManager {
 		String password = props.getProperty("jdbc.password");
 
 		return DriverManager.getConnection(url, user, password);
-	}
-	
-	/**
-	 * @param dbConnection
-	 * @throws SQLException
-	 */
-	public static void displayDatabaseMetadata(Connection dbConnection) throws SQLException {
-		DatabaseMetaData dbMetadata = dbConnection.getMetaData();
-		System.out.println("Database Product Name: " + dbMetadata.getDatabaseProductName());
-		System.out.println("Database Product Version: " + dbMetadata.getDatabaseProductVersion());
-		System.out.println("Driver Name: " + dbMetadata.getDriverName());
-		System.out.println("Driver Version: " + dbMetadata.getDriverVersion());
-		System.out.println("JDBC Version" + dbMetadata.getJDBCMajorVersion() + "." + dbMetadata.getJDBCMinorVersion() );		
-	}
-	
-	/**
-	 * @param dbConnection
-	 * @return
-	 * @throws SQLException
-	 */
-	public static List<String> retrieveDatabaseTables(Connection dbConnection) throws SQLException {
-		// Retrieve table metadata in the form a ResultSet
-		DatabaseMetaData dbMetadata = dbConnection.getMetaData();
-		String[] types = { "TABLE" };
-		String catalog = dbConnection.getCatalog();
-		String schema = "tc30_cw1"; // name of the database we want tables of
-		ResultSet tables = dbMetadata.getTables(catalog, schema, null, types);
-		
-		List<String> tableNames = new ArrayList<String>();
-		while (tables.next()) {
-			tableNames.add( tables.getString("TABLE_NAME") );
-		}
-		return tableNames;
 	}
 	
 }

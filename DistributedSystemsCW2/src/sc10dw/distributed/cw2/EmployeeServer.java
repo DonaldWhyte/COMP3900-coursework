@@ -5,8 +5,19 @@ import java.rmi.registry.*;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * @author sc10dw
+ * Program which starts up a server that creates an employee
+ * factory and registers it with the RMI registry.
+ * 
+ * Two test employees are also created and stored in this
+ * factory.
+ */
 public class EmployeeServer {
 	
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
 			EmployeeFactory employeeFactory = new EmployeeFactoryImpl();

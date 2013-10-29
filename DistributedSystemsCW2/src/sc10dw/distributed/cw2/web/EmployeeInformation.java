@@ -15,13 +15,11 @@ import sc10dw.distributed.cw2.*;
 
 /**
  * @author sc10dw
- *
+ * Servlet which searches for employees and presents informatiob
+ * about found employees.
  */
 public class EmployeeInformation extends HttpServlet {
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
@@ -57,8 +55,9 @@ public class EmployeeInformation extends HttpServlet {
 	}
 	
 	/**
-	 * @param surname
-	 * @return
+	 * Find existing employees with a specific surname.,
+	 * @param surname Surname of desired employees to retrieve
+	 * @return List of employees who have the given surname
 	 */
 	private List<Employee> getEmployees(String surname) {
 		try {

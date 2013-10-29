@@ -9,21 +9,19 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * @author sc10dw
- *
+ * Factory which can create new instances of employees
+ * as well as retrieve employees based on their surname.
  */
 public class EmployeeFactoryImpl extends UnicastRemoteObject implements EmployeeFactory {
 
 	/**
-	 * @throws RemoteException
+	 * Construct new employee factory.
+	 * @throws RemoteException if problem accessing remote object
 	 */
 	public EmployeeFactoryImpl() throws RemoteException {
 		employees = new HashMap<String, Employee>();
 	}
 	
-	/* (non-Javadoc)
-	 * @see sc10dw.distributed.cw2.EmployeeFactory#createEmployee(java.lang.String)
-	 */
 	@Override
 	public Employee createEmployee(String surname) throws RemoteException {
 		try {
@@ -38,9 +36,6 @@ public class EmployeeFactoryImpl extends UnicastRemoteObject implements Employee
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see sc10dw.distributed.cw2.EmployeeFactory#getEmployee(java.lang.String)
-	 */
 	@Override
 	public List<Employee> getEmployee(String surname) throws RemoteException {
 		// Iterate through employees and find ones with matching surnames
@@ -53,24 +48,24 @@ public class EmployeeFactoryImpl extends UnicastRemoteObject implements Employee
 		}
 		return matches;
 	}
-	
-	/* (non-Javadoc)
-	 * @see sc10dw.distributed.cw2.EmployeeFactory#getAllEmployees()
-	 */
+
 	@Override
 	public List<Employee> getAllEmployees() throws RemoteException {
 		return (List<Employee>)employees.values();
 	}
 	
 	/**
-	 * @return
+	 * Generate unique ID in application.
+	 * @return Unique ID as a text string
 	 */
 	private String generateID() {
 		return new UID().toString();
 	}
 	
 	/**
-	 * 
+	 * Contains all employees created by factory.
+	 * Keys are the employees' unique IDs and the
+	 * values are the actual instances of the employees.
 	 */
 	private Map<String, Employee> employees;
 	

@@ -5,17 +5,18 @@ import java.rmi.registry.*;
 
 /**
  * @author sc10dw
- *
+ * Program which retrieves a remote Employee object with
+ * the given RMI object ID and displays information about it.
+ * 
+ * If no employee object with the given ID is found, then
+ * an error message is displayed.
  */
 public class EmployeeRetriever
 {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args)
 	{
-		// Retrieve command line argumens
+		// Retrieve command line arguments
 		if (args.length < 1)
 		{
 			System.out.println("Usage: java EmployeeRetriever <EmployeeObjectName>");

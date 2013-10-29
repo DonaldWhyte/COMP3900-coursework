@@ -3,6 +3,19 @@ package sc10dw.distributed.cw2;
 import java.rmi.*;
 import java.rmi.registry.*;
 
+/**
+ * @author sc10dw
+ * Program which retrieves a remote Employee object with
+ * the given RMI object ID and updates its information
+ * using the given command line parameters.
+ * 
+ * If no employee object with the given ID is found, then
+ * an error message is displayed.
+ * 
+ * If the hourly rate or hours per week are not valid
+ * decimal numbers or integers respectively, then an
+ * error message is thrown.
+ */
 public class EmployeeUpdater
 {
 

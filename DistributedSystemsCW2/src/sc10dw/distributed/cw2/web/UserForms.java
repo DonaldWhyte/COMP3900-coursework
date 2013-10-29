@@ -6,14 +6,11 @@ import java.io.*;
 
 /**
  * @author sc10dw
- *
+ * Servlet which returns HTML forms allowing the user to
+ * search for, and create, employees in the payroll system.
  */
 public class UserForms extends HttpServlet {
 
-
-	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {

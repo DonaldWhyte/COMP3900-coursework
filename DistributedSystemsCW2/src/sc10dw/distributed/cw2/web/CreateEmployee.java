@@ -20,16 +20,13 @@ public class CreateEmployee extends HttpServlet {
 		throws ServletException, IOException {		
 		try {
 			// Create employee and redirect client to that employee's information page
-			String employeeObjectName = request.getParameter("id");
+			String surname = request.getParameter("surname");
 			double hourlyRate = Double.parseDouble( request.getParameter("hourlyRate") );
 			int hoursPerWeek = Integer.parseInt( request.getParameter("hoursPerWeek") );
 			
-			createEmployee(employeeObjectName,
-					request.getParameter("forename"),
-					request.getParameter("surname"),
-					hourlyRate,
-					hoursPerWeek);
-			response.sendRedirect("/employee?id=" + employeeObjectName);
+			createEmployee(request.getParameter("forename"),
+					surname, hourlyRate, hoursPerWeek);
+			response.sendRedirect(Config.ROOT_URL + "/employee?surname=" + surname);
 		} catch (Exception ex) {
 			// Return error message if they employee could not be created
 			response.setContentType(Config.HTTP_CONTENT_TYPE);
@@ -45,7 +42,7 @@ public class CreateEmployee extends HttpServlet {
 		}
 	}
 	
-	private Employee createEmployee(String objectName, String forename, String surname,
+	private Employee createEmployee(String forename, String surname,
 		double hourlyRate, int hoursPerWeek) throws RemoteException, NotBoundException {
 		// Get employee factory from server using RMI
 		Registry registry = LocateRegistry.getRegistry();

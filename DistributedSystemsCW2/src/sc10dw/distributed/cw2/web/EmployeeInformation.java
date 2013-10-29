@@ -20,7 +20,7 @@ public class EmployeeInformation extends HttpServlet {
 		response.setContentType(Config.HTTP_CONTENT_TYPE);
 		PrintWriter out = response.getWriter();
 		
-		String employeeObjectName = request.getParameter("id");
+		String employeeObjectName = request.getParameter("surname");
 		Employee employee = getEmployee(employeeObjectName);
 		if (employee != null) {
 			out.println("<html>\n\n<head>\n\t<title>Employee " + employee.getForename() + " " + employee.getSurname() + "</title>\n</head>\n\n");
@@ -45,12 +45,17 @@ public class EmployeeInformation extends HttpServlet {
 		out.close();
 	}
 	
-	private Employee getEmployee(String objectName) {
-		// Try and retrieve the RMI object with the given object name
+	private Employee getEmployee(String surname) {
+		// Find and return first employee with given surname
 		try {
 			Registry registry = LocateRegistry.getRegistry();
 			EmployeeFactory employeeFactory = (EmployeeFactory)registry.lookup("employee_factory");
-			return employeeFactory.getEmployee(objectName);
+			List<Employee> employees = employeeFactory.getEmployee(surname);
+			if (employees.size() > 0) {
+				return employees.get(0);
+			} else {
+				return null;
+			}
 		} catch (Exception e) {
 			return null;
 		}

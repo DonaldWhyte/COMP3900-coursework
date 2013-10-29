@@ -10,3 +10,4 @@
 # Eclipse files
 .metadata
 *.settings*
+*/bin/

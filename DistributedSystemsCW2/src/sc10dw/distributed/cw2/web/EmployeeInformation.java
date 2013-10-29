@@ -48,9 +48,9 @@ public class EmployeeInformation extends HttpServlet {
 	private Employee getEmployee(String objectName) {
 		// Try and retrieve the RMI object with the given object name
 		try {
-			Registry registry;
-			registry = LocateRegistry.getRegistry();
-			return (Employee)registry.lookup(objectName);
+			Registry registry = LocateRegistry.getRegistry();
+			EmployeeFactory employeeFactory = (EmployeeFactory)registry.lookup("employee_factory");
+			return employeeFactory.getEmployee(objectName);
 		} catch (Exception e) {
 			return null;
 		}

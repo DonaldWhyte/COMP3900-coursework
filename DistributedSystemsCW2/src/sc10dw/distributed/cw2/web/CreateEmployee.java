@@ -2,7 +2,10 @@ package sc10dw.distributed.cw2.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.List;
 
 import javax.servlet.http.*;
@@ -43,10 +46,11 @@ public class CreateEmployee extends HttpServlet {
 	}
 	
 	private Employee createEmployee(String objectName, String forename, String surname,
-		double hourlyRate, int hoursPerWeek) throws RemoteException {
-		EmployeeServerFactory serverFactory = new EmployeeServerFactoryImpl();
-		EmployeeServer server = serverFactory.createEmployeeServer(objectName, surname);
-		Employee newEmployee = server.getEmployeeObject();
+		double hourlyRate, int hoursPerWeek) throws RemoteException, NotBoundException {
+		// Get employee factory from server using RMI
+		Registry registry = LocateRegistry.getRegistry();
+		EmployeeFactory employeeFactory = (EmployeeFactory)registry.lookup("employee_factory");
+		Employee newEmployee = employeeFactory.createEmployee(surname);
 		
 		newEmployee.setForename(forename);
 		newEmployee.setHourlyRate(hourlyRate);

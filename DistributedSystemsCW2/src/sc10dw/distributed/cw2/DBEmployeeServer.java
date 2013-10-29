@@ -4,9 +4,16 @@ import java.rmi.registry.*;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * @author sc10dw
+ *
+ */
 public class DBEmployeeServer {
 
-       public static void main(String[] argv)
+     /**
+     * @param argv
+     */
+    public static void main(String[] argv)
        {
                // Retrieve command line arguments
                if (argv.length < 2) {

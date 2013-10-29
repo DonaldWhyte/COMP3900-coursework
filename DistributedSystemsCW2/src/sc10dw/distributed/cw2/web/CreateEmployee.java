@@ -13,8 +13,15 @@ import javax.servlet.ServletException;
 
 import sc10dw.distributed.cw2.*;
 
+/**
+ * @author sc10dw
+ *
+ */
 public class CreateEmployee extends HttpServlet {
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
@@ -49,6 +56,24 @@ public class CreateEmployee extends HttpServlet {
 		out.close();
 	}
 	
+	/**
+	 * @param forename
+	 * @param surname
+	 * @param hourlyRate
+	 * @param hoursPerWeek
+	 * @return
+	 * @throws RemoteException
+	 * @throws NotBoundException
+	 */
+	/**
+	 * @param forename
+	 * @param surname
+	 * @param hourlyRate
+	 * @param hoursPerWeek
+	 * @return
+	 * @throws RemoteException
+	 * @throws NotBoundException
+	 */
 	private Employee createEmployee(String forename, String surname,
 		double hourlyRate, int hoursPerWeek) throws RemoteException, NotBoundException {
 		// Get employee factory from server using RMI

@@ -8,12 +8,23 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author sc10dw
+ *
+ */
 public class DBEmployeeRetriever {
 
+	/**
+	 * @param dbConnection
+	 */
 	public DBEmployeeRetriever(Connection dbConnection) {
 		this.dbConnection = dbConnection;
 	}
 	
+	/**
+	 * @return
+	 * @throws RemoteException
+	 */
 	public List<Employee> allEmployees() throws RemoteException {
 		Statement statement = null;
 		try {
@@ -34,6 +45,11 @@ public class DBEmployeeRetriever {
 		return new ArrayList<Employee>();
 	}
 	
+	/**
+	 * @param surname
+	 * @return
+	 * @throws RemoteException
+	 */
 	public List<Employee> getEmployees(String surname) throws RemoteException {
 		Statement statement = null;
 		try {
@@ -57,6 +73,10 @@ public class DBEmployeeRetriever {
 		return new ArrayList<Employee>();
 	}
 	
+	/**
+	 * @return
+	 * @throws SQLException
+	 */
 	public double averageNumHoursWorked() throws SQLException {
 		Statement statement = dbConnection.createStatement();
 		ResultSet result = statement.executeQuery(AVERAGE_HOURS_WORKED_QUERY);
@@ -65,6 +85,10 @@ public class DBEmployeeRetriever {
 		return avgHours;
 	}	
 	
+	/**
+	 * @return
+	 * @throws SQLException
+	 */
 	public double averagePayRate() throws SQLException {
 		Statement statement = dbConnection.createStatement();
 		ResultSet result = statement.executeQuery(AVERAGE_BASE_PAY_RATE_QUERY);
@@ -73,6 +97,12 @@ public class DBEmployeeRetriever {
 		return avgPayRate;		
 	}
 	
+	/**
+	 * @param results
+	 * @return
+	 * @throws RemoteException
+	 * @throws SQLException
+	 */
 	private List<Employee> processEmployeeResults(ResultSet results) throws RemoteException, SQLException {
 		List<Employee> employees = new ArrayList<Employee>();
 		while (results.next()) {
@@ -88,16 +118,36 @@ public class DBEmployeeRetriever {
 		return employees;
 	}
 	
+	/**
+	 * @param result
+	 * @return
+	 * @throws SQLException
+	 */
 	private double processAverage(ResultSet result) throws SQLException {
 		result.next();
 		return result.getDouble(1);
 	}
 
+	/**
+	 * 
+	 */
 	private Connection dbConnection;
 	
+	/**
+	 * 
+	 */
 	private final static String ALL_EMPLOYEES_QUERY = "SELECT * FROM employees";
+	/**
+	 * 
+	 */
 	private final static String EMPLOYEES_BY_SURNAME_QUERY = "SELECT * FROM employees WHERE surname = '%s'";
+	/**
+	 * 
+	 */
 	private final static String AVERAGE_HOURS_WORKED_QUERY = "SELECT AVG(numberHours) FROM employees";
+	/**
+	 * 
+	 */
 	private final static String AVERAGE_BASE_PAY_RATE_QUERY = "SELECT AVG(baseRate) FROM employees";
 	
 }

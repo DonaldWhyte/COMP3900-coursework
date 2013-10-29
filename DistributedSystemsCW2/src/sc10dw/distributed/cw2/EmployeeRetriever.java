@@ -3,9 +3,16 @@ package sc10dw.distributed.cw2;
 import java.rmi.*;
 import java.rmi.registry.*;
 
+/**
+ * @author sc10dw
+ *
+ */
 public class EmployeeRetriever
 {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args)
 	{
 		// Retrieve command line argumens

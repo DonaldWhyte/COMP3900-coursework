@@ -11,10 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * @author sc10dw
+ *
+ */
 public class DBConnectionManager {
 
+	/**
+	 * 
+	 */
 	private static String propertiesFilename = "jdbc.properties";
 	
+	/**
+	 * @return
+	 * @throws IOException
+	 * @throws SQLException
+	 */
 	public static Connection getConnection() throws IOException, SQLException
 	{
 		// Load properties
@@ -39,6 +51,10 @@ public class DBConnectionManager {
 		return DriverManager.getConnection(url, user, password);
 	}
 	
+	/**
+	 * @param dbConnection
+	 * @throws SQLException
+	 */
 	public static void displayDatabaseMetadata(Connection dbConnection) throws SQLException {
 		DatabaseMetaData dbMetadata = dbConnection.getMetaData();
 		System.out.println("Database Product Name: " + dbMetadata.getDatabaseProductName());
@@ -48,6 +64,11 @@ public class DBConnectionManager {
 		System.out.println("JDBC Version" + dbMetadata.getJDBCMajorVersion() + "." + dbMetadata.getJDBCMinorVersion() );		
 	}
 	
+	/**
+	 * @param dbConnection
+	 * @return
+	 * @throws SQLException
+	 */
 	public static List<String> retrieveDatabaseTables(Connection dbConnection) throws SQLException {
 		// Retrieve table metadata in the form a ResultSet
 		DatabaseMetaData dbMetadata = dbConnection.getMetaData();

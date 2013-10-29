@@ -4,8 +4,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.*;
 
+/**
+ * @author sc10dw
+ *
+ */
 public class UserForms extends HttpServlet {
 
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {

@@ -13,8 +13,15 @@ import javax.servlet.ServletException;
 
 import sc10dw.distributed.cw2.*;
 
+/**
+ * @author sc10dw
+ *
+ */
 public class EmployeeInformation extends HttpServlet {
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
@@ -49,6 +56,10 @@ public class EmployeeInformation extends HttpServlet {
 		out.close();
 	}
 	
+	/**
+	 * @param surname
+	 * @return
+	 */
 	private List<Employee> getEmployees(String surname) {
 		try {
 			Registry registry = LocateRegistry.getRegistry();

@@ -13,7 +13,7 @@ import sc10dw.distributed.cw2.*;
 public class CreateEmployee extends HttpServlet {
 
 	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {		
 		try {
 			// Create employee and redirect client to that employee's information page
@@ -35,6 +35,8 @@ public class CreateEmployee extends HttpServlet {
 			out.println("\t<body>\t\t<h1>Employee Could Not Be Created</h1>");
 			out.println("\t\t<p>A server-side error occurred when attempting to create the specified employee:</p>");
 			out.println("\t\t<p>" + ex.getMessage() + "</p>");
+			out.println("\t\t<a href='" + Config.ROOT_URL + "'><button type='button'>Back to Main Page</button></a>");
+			
 			out.println("\t</body>\n\n</html>");
 			out.close();
 		}

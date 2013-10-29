@@ -32,12 +32,13 @@ public class EmployeeInformation extends HttpServlet {
 			out.println("\t\t<tr><th>Hours per Week</th><td>" + employee.getNumberHours() + "</td></tr>");
 			out.println("\t\t<tr><th>Total Earnings per Week</th><td>" + employee.getWeeklyEarning() + "</td></tr>");
 			out.println("\t\t</table>");
-			out.println("\t\t<button type='button'><a href='/'>Back to Main Page</a></button>");
-			out.println("\t</body>\n\n</html>");
+			out.println("\t\t<a href='" + Config.ROOT_URL + "'><button type='button'>Back to Main Page</button></a>");
+			out.println("\t</body>\n\n</html>"); 
 		} else {
 			out.println("<html>\n\n<head>\n\t<title>Employee Not Found</title>\n</head>\n\n");
 			out.println("\t<body>\n\t\t<h1>Employee Not Found</h1>");
 			out.println("\t\t<p>Employee with object name '" + employeeObjectName + "' not found.</p>");
+			out.println("\t\t<a href='" + Config.ROOT_URL + "'><button type='button'>Back to Main Page</button></a>");
 			out.println("\t</body>\n\n</html>");
 		}
 		

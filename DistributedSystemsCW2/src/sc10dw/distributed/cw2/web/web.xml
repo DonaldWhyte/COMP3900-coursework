@@ -8,22 +8,22 @@
   </description>
   <servlet>
     <servlet-name>CreateEmployee</servlet-name>
-    <servlet-class>CreateEmployee</servlet-class>
+    <servlet-class>sc10dw.distributed.cw2.web.CreateEmployee</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>EmployeeInformation</servlet-name>
-    <servlet-class>EmployeeInformation</servlet-class>
+    <servlet-class>sc10dw.distributed.cw2.web.EmployeeInformation</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>UserForms</servlet-name>
-    <servlet-class>UserForms</servlet-class>
+    <servlet-class>sc10dw.distributed.cw2.web.UserForms</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CreateEmployee</servlet-name>
     <url-pattern>/create</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>EmployeeInformation>/servlet-name>
+    <servlet-name>EmployeeInformation</servlet-name>
     <url-pattern>/employee</url-pattern>
   </servlet-mapping>
   <servlet-mapping>

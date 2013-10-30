@@ -22,7 +22,7 @@ public class EmployeeServer {
 		try {
 			EmployeeFactory employeeFactory = new EmployeeFactoryImpl();
 			employeeFactory.createEmployee("Whyte");
-			employeeFactory.createEmployee("Campbell");
+			employeeFactory.createEmployee("Johnson");
 			Registry registry = LocateRegistry.getRegistry();
 			registry.rebind("employee_factory", employeeFactory);		
 		} catch (Exception ex) {

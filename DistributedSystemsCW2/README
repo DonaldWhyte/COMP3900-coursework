@@ -1,0 +1,75 @@
+-----------------------------------------------------------
+Name: Distributed Systems Coursework 2
+Year: 2013-2014
+Author: Donald Whyte (sc10dw@leeds.ac.uk)
+-----------------------------------------------------------
+
+All the source files required to execute the programs for
+this coursework are provided in this ZIP file. Eclipse
+project files are also given for convenient compilation
+and execution.
+
+Additionally, the ZIP file contains "payroll.war", a
+packaged web application that can be deployed on a Java
+application server.
+
+
+
+Executing Question 3 Program:
+java EmployeeUpdater <EmployeeObjectName> <Forename> <HourlyRate> <HoursPerWeek>
+where:
+    EmployeeObjectName = ID of employee object in RMI registry to update
+    Forename = New forename to give employee object
+    HourlyRate = New hourly pay rate to give employee object
+    HoursPerWeek = New hours per week the employee works
+NOTE:
+To execute this, it requires the ORIGINAL EmployeeServer to be running.
+This is because it doesn't use the EmployeeFactory class like the
+modified EmployeeServer in the code deliverables.
+
+
+
+Executing Question 4 Program:
+java EmployeeRetriever <EmployeeObjectName>
+where:
+    EmployeeObjectName = ID of employee object in RMI registry
+                         to get information about
+NOTE:
+To execute this, it requires the ORIGINAL EmployeeServer to be running.
+This is because it doesn't use the EmployeeFactory class like the
+modified EmployeeServer in the code deliverables.
+
+
+
+Executing Question 6 Program (Server which ):
+java DBEmployeeServer <EmployeeSurname> <EmployeeObjectName>
+where:
+    EmployeeSurname = Surname of employee to retrieve from employee database
+    EmployeeObjectName = ID to use for RMI Employee object constructed from
+                         the information retrieved from the database
+NOTE:
+The 'jdbc.properties' file should be in the working directory when executing
+DBEmployeeServer, as it specifies the database to connect to and the
+username/password to use for the connection (currently this defaults to
+my credentials). 
+
+
+
+Executing Question 7 Program (running server with factory):
+java EmployeeServer
+
+
+
+Executing Web Application for Last Question:
+1) Start the RMI registry with the following command:
+       rmiregistry -J-Djava.rmi.server.codebase=file://<WEB_APP_BIN>
+   where <WEB_APP_BIN> is an absolute path to the “classes” directory of
+   the deployed web application's compiled Java classes. Example:
+       rmiregistry -J-Djava.rmi.server.codebase=file:///export/mailgrp3_g/sc10dw/tomcat/webapps/payroll/WEB-INF/classes
+2) Run the server which will register the employee factory using:
+	   java EmployeeServer
+3) Deploy the web application on your Tomcat server by copying by copying
+   the payroll.war file, provided in the code deliverables, to Tomcat's
+   webapps directory.
+4) Make sure your Tomcat server has started
+5) Access the web application through http://localhost:8080/payroll/

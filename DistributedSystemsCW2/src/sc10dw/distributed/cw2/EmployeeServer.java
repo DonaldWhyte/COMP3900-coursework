@@ -21,8 +21,13 @@ public class EmployeeServer {
 	public static void main(String[] args) {
 		try {
 			EmployeeFactory employeeFactory = new EmployeeFactoryImpl();
-			employeeFactory.createEmployee("Whyte");
-			employeeFactory.createEmployee("Johnson");
+			Employee emp1 = employeeFactory.createEmployee("Whyte");
+			emp1.setForename("Donald");
+			emp1.setNumberHours(40);
+			emp1.setHourlyRate(10.5);
+			Employee emp2 = employeeFactory.createEmployee("Johnson");
+			emp2.setNumberHours(17);
+			emp2.setHourlyRate(6.5);			
 			Registry registry = LocateRegistry.getRegistry();
 			registry.rebind("employee_factory", employeeFactory);		
 		} catch (Exception ex) {
